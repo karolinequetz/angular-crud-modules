@@ -1,5 +1,13 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+:root {
+  --bs-body-bg: rgb(18, 18, 20);
+}
 body {
   background-color: rgb(18, 18, 20);
+}
+
+input {
+  color: white !important;
 }
 
 h1,
@@ -9,7 +17,7 @@ a,
 label,
 th,
 td {
-  color: white;
+  color: white !important;
 }
 
 table {

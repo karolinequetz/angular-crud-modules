@@ -6,30 +6,32 @@ import { Student } from './student';
 })
 export class StudentsService {
   students: Student[] = [];
+
   constructor() {
     this.loadStudents();
   }
+
   save(student: Student) {
     student.id = this.nextId();
     this.students.push(student);
   }
 
   update(id: number, student: Student) {
-    const index = this.students.findIndex((s) => s.id === id);
+    const index = this.students.findIndex((s) => s.id == id);
     this.students.splice(index, 1, student);
   }
 
   deleteById(id: number) {
-    const index = this.students.findIndex((s) => s.id === id);
+    const index = this.students.findIndex((s) => s.id == id);
     this.students.splice(index, 1);
   }
 
-  findAll() {
-    return this.loadStudents();
+  findById(id: number) {
+    return this.students.find((s) => s.id == id);
   }
 
-  findById(id: number) {
-    return this.students.find((s) => s.id === id);
+  findAll() {
+    return this.students;
   }
 
   private nextId() {
@@ -37,6 +39,7 @@ export class StudentsService {
     if (this.students.length > 0) {
       lastId = Math.max(...this.students.map((student) => student.id));
     }
+
     return ++lastId;
   }
 
