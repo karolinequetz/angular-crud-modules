@@ -19,7 +19,8 @@ export class StudentNewComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.studentService.save(this.student);
-    this.router.navigateByUrl('/students');
+    this.studentService.save(this.student).subscribe(() => {
+      this.router.navigateByUrl('/students');
+    });
   }
 }

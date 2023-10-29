@@ -1,11 +1,17 @@
-export class Student {
+export interface Student {
   id: number;
   name: string;
   email: string;
   birthday: string;
+  createdAt: Date;
+}
 
-  constructor(id?: number, name?: string, email?: string, birthday?: string) {
-    this.id = id || 0;
+export class Student {
+  name: string;
+  email: string;
+  birthday: string;
+
+  constructor(name?: string, email?: string, birthday?: string) {
     this.name = name || '';
     this.email = email || '';
     this.birthday = birthday || '';

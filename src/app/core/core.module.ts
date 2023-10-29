@@ -10,7 +10,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MainComponent } from './layout/main/main.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { ToastrModule } from 'ngx-toastr';
 
+const toastrConfig = {
+  maxOpened: 1,
+  timeOut: 5000,
+  autoDismiss: true,
+  preventsDuplicates: true,
+  positionClass: 'toast-top-right',
+};
 @NgModule({
   declarations: [HeaderComponent, MainComponent],
   imports: [
@@ -21,6 +29,7 @@ import { HeaderComponent } from './layout/header/header.component';
     RouterModule,
     NgbModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot(toastrConfig),
   ],
   exports: [MainComponent],
 })

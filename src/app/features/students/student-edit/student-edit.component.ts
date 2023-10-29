@@ -24,15 +24,19 @@ export class StudentEditComponent implements OnInit {
   }
 
   onUpdate() {
-    this.studentService.update(this.id, this.student!);
-    this.router.navigateByUrl('/students');
+    this.studentService.update(this.id, this.student!).subscribe(() => {
+      this.router.navigateByUrl('/students');
+    });
   }
 
   private searchStudent() {
-    const student = this.studentService.findById(this.id);
-    console.log(student);
-    if (student) {
-      this.student = { ...student };
-    }
+    this.studentService.findById(this.id).subscribe(
+      (response) => {
+        this.student = response;
+      },
+      () => {
+        this.router.navigateByUrl('/students');
+      }
+    );
   }
 }

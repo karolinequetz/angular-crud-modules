@@ -14,6 +14,7 @@
         <th>E-mail</th>
         <th>Age</th>
         <th>Birthday</th>
+        <th>Created At</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -26,6 +27,7 @@
         <td>{{ student.email }}</td>
         <td>{{ student.birthday | age }}</td>
         <td>{{ student.birthday | date : "dd/MM/yyy" }}</td>
+        <td>{{ student.createdAt | date : "dd/MM/yyyy HH:mm" }}</td>
         <td>
           <a
             [routerLink]="['/students', student.id]"
