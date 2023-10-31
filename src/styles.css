@@ -1,8 +1,7 @@
-@import "@fortawesome/fontawesome-free/css/all.css";
-
 :root {
   --bs-body-bg: rgb(18, 18, 20);
 }
+
 body {
   background-color: rgb(18, 18, 20);
 }

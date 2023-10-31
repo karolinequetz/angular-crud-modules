@@ -22,25 +22,11 @@
       "createdAt": 1633923723674
     },
     {
-      "id": 4,
-      "name": "Marcos",
-      "email": "marcos@gmail.com",
-      "birthday": "2003-05-17",
-      "createdAt": 1633923723674
-    },
-    {
       "id": 5,
       "name": "teste",
       "email": "teste@gmail.com",
       "birthday": "1993-04-12",
       "createdAt": 1633923723674
-    },
-    {
-      "name": "teste2",
-      "email": "teste2@gmail.com",
-      "birthday": "1991-01-01",
-      "createdAt": 1698618241178,
-      "id": 6
     }
   ]
 }

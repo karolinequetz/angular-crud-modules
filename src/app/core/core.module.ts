@@ -15,8 +15,9 @@ import { ToastrModule } from 'ngx-toastr';
 const toastrConfig = {
   maxOpened: 1,
   timeOut: 5000,
+  enableHtml: true,
   autoDismiss: true,
-  preventsDuplicates: true,
+  preventDupicates: true,
   positionClass: 'toast-top-right',
 };
 @NgModule({
@@ -31,6 +32,7 @@ const toastrConfig = {
     NgxSpinnerModule,
     ToastrModule.forRoot(toastrConfig),
   ],
+
   exports: [MainComponent],
 })
 export class CoreModule {}
