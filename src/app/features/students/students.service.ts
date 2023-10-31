@@ -4,14 +4,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, delay, finalize } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, delay, finalize, mergeMap, scan } from 'rxjs/operators';
+import { Observable, of, throwError, retryWhen } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  apiUrl = `${environment.apiUrl}/students`;
+  apiUrl = `${environment.apiUrl}/studentss`;
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
@@ -58,6 +58,7 @@ export class StudentsService {
     this.spinner.show();
     return this.http.get<Student[]>(this.apiUrl).pipe(
       delay(1000),
+      retryWhen((err) => this.retryHandler(err)),
       catchError((err) => this.exceptionHandler(err)),
       finalize(() => this.spinner.hide())
     );
@@ -65,6 +66,29 @@ export class StudentsService {
 
   private exceptionHandler(error: HttpErrorResponse) {
     this.toastr.error(error.message, `${error.status} - ${error.statusText}`);
-    return throwError(error);
+    return throwError(() => error);
+  }
+
+  private retryHandler(error: Observable<any>) {
+    return error.pipe(
+      delay(1000),
+      mergeMap((err) => {
+        if (err.status < 500) {
+          return of(err);
+        }
+        return throwError(() => error);
+      }),
+      scan((acc, err) => {
+        if (acc > 5) {
+          throw err;
+        }
+        this.toastr.warning(
+          `Retrying the request #${acc}`,
+          `${err.status} - Retrying `
+        );
+
+        return ++acc;
+      }, 1)
+    );
   }
 }
